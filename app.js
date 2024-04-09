@@ -33,15 +33,65 @@ app.get('/adduserdata',(req,res)=>{
 })
 app.get('/showuser', async(req,res)=>{
     const users =await User.find({})
-    console.log(users)
     res.render('showuser.ejs',{users})
 })
+ 
+app.get('/edit-user', async (req, res) => {
+    try {
+        
+        const user = await User.findById(req.query.id); // Get the user by ID from the query parameter
+        console.log(user)
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        res.render('edituser', { user }); // Render the edit-user page with the user data
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
 
 
 
 
 
 //////post route ///
+
+
+
+// POST route to handle editing a user
+app.post('/edit-user', async (req, res) => {
+    try {
+        const { id, name, email, mobile } = req.body; // Assuming you're sending the updated user data in the request body
+        const user = await User.findByIdAndUpdate(id, { name, email, mobile }, { new: true }); // Find user by ID and update
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        res.redirect('/showuser'); // Redirect to the user list page after editing
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+});
+
+
+app.get('/delete-user', async(req,res)=>{
+    try {
+        const { id } = req.query; // Assuming you're sending the user ID in the request body
+        console.log(id)
+        const user = await User.findByIdAndDelete(id); // Find user by ID and delete
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        res.redirect('/showuser'); // Redirect to the user list page after deleting
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
+
+
+})
+
 app.post("/userinput",async(req,res)=>{
     const{name,email,mobile} = req.body;
     console.log(name,email,mobile);

@@ -4,60 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Users</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        /* Add your CSS styles here */
+        /* CSS styles */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f9f9f9;
         }
         .container {
             max-width: 800px;
             margin: 20px auto;
-            padding: 0 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .user-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
         .user-item {
             border-bottom: 1px solid #ccc;
-            padding: 10px 0;
+            padding: 15px 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
+        .user-item span {
+            font-size: 16px;
+            color: #333;
+        }
         .user-item button {
-            background-color: #007bff;
-            color: #fff;
+            background-color: transparent;
             border: none;
-            padding: 5px 10px;
+            padding: 5px;
             cursor: pointer;
-            margin-left: 10px;
+            transition: all 0.3s ease;
         }
-        .user-item button.edit {
-            background-color: #ffc107;
+        .user-item button:hover {
+            background-color: #f1f1f1;
+            border-radius: 50%;
         }
-        .user-item button.delete {
-            background-color: #dc3545;
+        .edit i, .delete i {
+            font-size: 18px;
+        }
+        .edit i {
+            color: #ffc107; /* Edit button color */
+        }
+        .delete i {
+            color: #dc3545; /* Delete button color */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .back{
+            color: rgba(12, 77, 191, 0.808);
+            font-size: 3rem;
+            font-weight: 700;
+
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>User List</h1>
+        <h1>User Data List</h1>
         <ul class="user-list">
             <!-- Loop through users and display each user -->
             <% users.forEach(user => { %>
                 <li class="user-item">
-                    <span><%= user.name %> - <%= user.email %> - <%= user.mobile %></span>
+                    <span><b>Name:</b> <%= user.name %> - <b><i class="fa-solid fa-envelope"></i></b> <%= user.email %> - <b><i class="fa-solid fa-phone"></i></b> <%= user.mobile %></span>
                     <div>
-                        <button class="edit">Edit</button>
-                        <button class="delete">Delete</button>
+                        <a href="/edit-user?id=<%= user._id %>"><button class="edit"><i class="fas fa-edit"></i></button></a>
+                        <a href="/delete-user?id=<%= user._id %>"><button class="delete"><i class="fas fa-trash-alt"></i></button></a>
                     </div>
                 </li>
             <% }); %>
         </ul>
+        <div class="back">
+           <a href="/"> <i class="fa-solid fa-arrow-left"></i></a>
+        </div>
     </div>
+  
 </body>
 </html>
