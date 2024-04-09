@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #01f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .task-description {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+            max-width: 90%;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 10px;
+        }
+
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Home Page</h1>
+        <div class="task-description">
+            <h2>Task 1</h2>
+            <p></p>
+        </div>
+        <div class="button-container">
+            <button onclick="location.href='/adduserdata'">Add User</button>
+            <button onclick="location.href='/show-user'">Show User</button>
+        </div>
+    </div>
+</body>
+</html>
