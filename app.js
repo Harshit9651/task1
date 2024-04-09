@@ -31,6 +31,11 @@ app.get('/',(req,res)=>{
 app.get('/adduserdata',(req,res)=>{
     res.render('adduser.ejs')
 })
+app.get('/showuser', async(req,res)=>{
+    const users =await User.find({})
+    console.log(users)
+    res.render('showuser.ejs',{users})
+})
 
 
 
@@ -45,7 +50,7 @@ app.post("/userinput",async(req,res)=>{
     });
     const save =  await userdata.save();
 console.log(save)
-res.render('/')
+res.redirect('/')
 
 
 })
